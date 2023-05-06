@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Home-Page</title>
+</head>
+<body>
+    <%- include("partials/header") -%>
+    <div class="home-title">
+        <h2 style="color: black;"><%= homeContent.homeTitle %><h2/>
+        <h3><%= homeContent.homeTitle2 %><h3/>
+        <a href="/home/compose" class="btn btn:hover">Create a Blog</a>    
+    </div>
+    <hr/>
+    <div>
+        <h2 style="text-decoration: underline;text-align: center;">Read Our Technical Blogs</h2>
+        <%newPosts.forEach((post)=>{%>
+            <h1><%= post.title %></h1>
+            <p><%= post.content %><a href="/home/posts/<%= post._id %>"> ... Read More</a></p>
+        <%})%>
+    </div>
+  
+
+
+    <%- include("partials/footer") -%>
+</body>
+</html>

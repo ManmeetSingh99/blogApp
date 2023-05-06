@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blog Home-Page</title>
+  </head>
+  <body>
+    <%- include("partials/header") -%>
+    <h1>Contact Us</h1>
+    <div contact-container>
+      <form class="contact-form" enctype="text/plain" action="mailto:manmeetsvirdi99@gmail.com" method="post">
+        <label>Full Name <span style="color: red;">*</span></label>
+        <input type="text" />
+
+        <label>E-Mail <span style="color: red;">*</span></label>
+        <input type="text" name="" id="" required/>
+
+        <label for="">Country</label>
+        <select name="" id="">
+            <option value=""></option>
+            <option value="">Australia</option>
+            <option value="">Germany</option>
+            <option value="">Canada</option>
+            <option value="">France</option>
+            <option value="">India</option>
+            <option value="">Russia</option>
+            <option value="">US</option>
+        </select>
+
+        <label>Message <span style="color: red;">*</span></label>
+        <textarea name="message" id="" cols="30" rows="10"></textarea>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <%- include("partials/footer") -%>
+  </body>
+</html>
