@@ -48,7 +48,7 @@ app.post("/", (req, res) => {
   bcrypt.hash(req.body.password,saltRounds,(err,hash)=>{
     const newUser = new User({
       fullName: req.body.name,
-      username: req.body.email,
+      username: _.lowerCase(req.body.email),
       password: hash,
     });
     newUser.save();
@@ -61,21 +61,21 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  const loginEmail = req.body.email;
+  // console.log(req.body);
+  const loginEmail = _.lowerCase(req.body.email);
   const loginPassword = req.body.password;
-  User.find({ username: loginEmail }).then((foundUser) => {
-    foundUser.map((user) => {
-      bcrypt.compare(loginPassword,user.password,(err,result)=>{
-        if(result === true){
-          res.redirect("/home");
-        }
-        else {
-          res.render("register");
-        }
+  User.findOne({username:loginEmail})
+      .then((foundUser)=>{
+        bcrypt.compare(loginPassword,foundUser.password,(err,result)=>{
+          console.log(result);
+          if(result === true){
+            res.redirect("/home");
+          }
+          else {
+            res.render("register");
+          }
       })
-    });
-  });
-});
+  })});
 
 app.get("/home", (req, res) => {
   Post.find().then((posts) => {
@@ -128,4 +128,4 @@ app.get("/home/posts/:postId", (req, res) => {
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
-});
+})
